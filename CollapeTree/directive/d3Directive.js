@@ -1,6 +1,6 @@
 Module
 
-.controller('collapeTreeCtrl', ['$scope', function($scope) {
+.controller('collapeTreeCtrl', ['$scope', '$rootScope', function($scope, $rootScope) {
     var ctrl = this;
     var scope = $scope;
     // var date = new Date();
@@ -46,7 +46,11 @@ Module
     		scope.currentQuestion += 1;
     	}
     	scope.$digest();
-  	})
+  	});
+
+  	$rootScope.$on('callLearnForm', function(events, startStatus){
+  		scope.start();
+	});
 
 	scope.$watch('nodeId', function(newValue){
 		scope.nodeId = newValue;
@@ -81,7 +85,8 @@ return {
   		// val: '=',
   		// grouped: '=',
   		nodeId: '=',
-  		updateNode: '&updateNode'
+  		updateNode: '&updateNode',
+  		inputFile: '@'
 	},
 	link: function (scope, element, attrs) {
 		// scope.nodeId = 0;
@@ -100,7 +105,8 @@ return {
 		var diagonal = d3.svg.diagonal()
 		    .projection(function(d) { return [d.y, d.x]; });
 
-		var svg = d3.select("imagebox").append("svg")
+		var svgParentTag = (scope.inputFile == 'rule.json'? 'imagebox' : 'understandBox')
+		var svg = d3.select(/*"imagebox"*/svgParentTag).append("svg")
 		    .attr("width", width + margin.right + margin.left)
 		    .attr("height", height + margin.top + margin.bottom)
 		    // .attr("width", "10000000px")
@@ -108,7 +114,7 @@ return {
 		  .append("g")
 		    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-		d3.json("rule.json", function(error, flare) {
+		d3.json(/*"rule.json"*/scope.inputFile, function(error, flare) {
 		  if (error) throw error;
 
 		  root = flare;

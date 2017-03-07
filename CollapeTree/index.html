@@ -29,29 +29,36 @@
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular.min.js"></script>
 </head>
 <body>
-<div>Choose only one choice for each question.</div>
+<!-- <div>Association rules visualization test.</div> -->
 
   <script src="https://d3js.org/d3.v3.min.js"></script>
   <script src="./mainInstance.js"></script>
+  <script src="./directive/bioDirective.js"></script>
   <script src="./directive/d3Directive.js"></script>
-  <!-- <script src="./collapeTreeCtrl.js"></script> -->
+  <script src="./directive/Controller/understandCtrl.js"></script>
 
-  <!-- <div>
-    <graph></graph>
-  </div> -->
-
+  <div id='question1' ng-controller='understandCtrl as understandCtrl'>
+    <div ng-show='understandTestShow == true'>
+      <understandbox>
+        <graph input-file='./directive/understandRule.json' ></graph>
+        <div>Please find rule {vis, legend} --> {LegendItem}</div>
+      </understandbox>
+    </div>
+  <div>
+  </div>
 
   <div id='question1' ng-controller='collapeTreeCtrl as collapeTreeCtrl'>
-    <div ng-show='startStatus == true'>
+    <div>
+      <bio-directive></bio-directive>
+    </div>
+    <div ng-if='startStatus == true'>
+      <p>message</p>
       <imagebox>
-        <graph node-id='nodeId' ></graph>
+        <graph input-file='rule.json' ></graph>
       </imagebox>
+
       <p> {{answerChecker[currentQuestion].text}} </p>
     </div>
-    <!-- <div ng-show='true'>{{addTimeUnit() || 'time unit'}}</div> -->
-    <button ng-click='start()' ng-if='startStatus == false' class='startButton'>Start</button>
-    <!-- <div id='answerTab'>{{nodeId}}</div> -->
-    <!-- <div id='completeStatus'></div> -->
   </div>
 </body>
 </html>
