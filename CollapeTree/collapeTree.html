@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
+<html ng-app='collapeTree'>
 <style>
 
 .node {
@@ -23,13 +24,34 @@
 }
 
 </style>
+<head>
+  <link rel="stylesheet" type="text/css" href="./css/collapeTree.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular.min.js"></script>
+</head>
 <body>
 <div>Choose only one choice for each question.</div>
-<script src="https://d3js.org/d3.v3.min.js"></script>
-<script src="collapeTree.js"></script>
-<div id='question1'>
-  <p> 1) {bruises?=f, class=p} --> {gill-attachment=f} </p>
-  <div>time</div>
-  <div>correct icon</div>
-</div>
+
+  <script src="https://d3js.org/d3.v3.min.js"></script>
+  <script src="./mainInstance.js"></script>
+  <script src="./directive/d3Directive.js"></script>
+  <!-- <script src="./collapeTreeCtrl.js"></script> -->
+
+  <!-- <div>
+    <graph></graph>
+  </div> -->
+
+
+  <div id='question1' ng-controller='collapeTreeCtrl as collapeTreeCtrl'>
+    <div ng-show='startStatus == true'>
+      <imagebox>
+        <graph node-id='nodeId' ></graph>
+      </imagebox>
+      <p> {{answerChecker[currentQuestion].text}} </p>
+    </div>
+    <!-- <div ng-show='true'>{{addTimeUnit() || 'time unit'}}</div> -->
+    <button ng-click='start()' ng-if='startStatus == false' class='startButton'>Start</button>
+    <!-- <div id='answerTab'>{{nodeId}}</div> -->
+    <!-- <div id='completeStatus'></div> -->
+  </div>
 </body>
+</html>

@@ -1,0 +1,39 @@
+.startButton{
+	float: left;
+}
+
+.question{
+	clear: left;
+	float: left;
+	position: relative;
+	display: inline-block;
+	margin-right: 10px;
+}
+.inputBox{
+	/*clear: both;*/
+	float: left;
+	margin-top: 15px;
+	/*margin-left: 10px;*/
+	margin-right: 10px;
+	width: 40px;
+	/*position: relative;*/
+	display: block;
+}
+
+.line{
+	position: absolute;
+}
+
+.relative{
+	position: relative;
+}
+
+.unit{
+	/*margin-left: 10px;*/
+	float: left;
+}
+
+.checkbox{
+	margin-top:20px;
+	float: left;
+}
