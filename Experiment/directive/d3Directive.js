@@ -5,7 +5,6 @@ Module
     var scope = $scope;
     // var date = new Date();
     // scope.time = '10.32 sec';
-    scope.timeWithUnit = 'xxx sec'
     scope.nodeId = 0;
     scope.timeCapture = {start: 0, end: 0};
     scope.startStatus = false;
@@ -27,16 +26,47 @@ Module
  //    scope.$watch('nodeId', function(newValue){
 	// 	console.log(newValue + 'in controller');
 	// });
+	var isCorrectNode = function(node) {
+		var depth = node.depth;
+		var ruleName = '}-->' + node.name;
+		var currentNode = node;
+		for(var index=1; index < depth; index++){
+			// ruleName = node.parent.
+			if(index == depth-1){
+				// ruleName = '{' + ruleName + '}-->' + node.parent.name;
+				ruleName = '{' + currentNode.parent.name + ruleName;
+			}else{
+				ruleName = ',' + currentNode.parent.name + ruleName;
+			}
+			currentNode = currentNode.parent;
+		}
+
+
+		///////////////////////////
+		var words = scope.answerChecker[scope.currentQuestion].text.split(' ');
+		var compareTxt = '';
+		for(index in words){
+			if(index == 0){continue;}
+			compareTxt += words[index];
+		}
+
+		/////////////
+		if(ruleName.localeCompare(compareTxt)==0){
+			return true;
+		}
+		return false;
+	};
+
 	scope.start = function(){
 		scope.startStatus = true;
 		var date = new Date();
 		scope.timeCapture.start = date.getTime();
-	}
-	scope.$on('changeNode', function(events, args){
+	};
+	scope.$on('changeNode', function(events, node){
     	// console.log(args);
     	// scope.nodeId = args;
     	// scope.$digest();
-    	if(scope.answerChecker[scope.currentQuestion].id == args){
+    	if(/*scope.answerChecker[scope.currentQuestion].id == args*/isCorrectNode(node)){
     		if(scope.currentQuestion == 9){
     			var date = new Date();
     			scope.timeCapture.end = date.getTime();
@@ -227,7 +257,7 @@ return {
 		  console.log(d);
 		  // scope.nodeId = d.id;
 		  // scope.updateNode();
-		  scope.$emit('changeNode', d.id);
+		  scope.$emit('changeNode', d);
 		   // if(d.id == 14){
 		   //    document.getElementById("completeStatus").innerHTML = String.fromCharCode(9989);
 		   // }

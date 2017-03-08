@@ -11,8 +11,8 @@ Module
         scope.timeCapture.start = date.getTime();
       }
 
-      scope.$on('changeNode', function(events, nodeId){
-        if(nodeId == 20){
+      scope.$on('changeNode', function(events, node){
+        if(node.name === 'LegendItem'){
           scope.understandTestShow = false;
           var date = new Date();
           scope.timeCapture.end = date.getTime();
