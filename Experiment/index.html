@@ -23,10 +23,16 @@
   stroke-width: 1.5px;
 }
 
+.left {
+  float: left;
+}
+
 </style>
 <head>
-  <link rel="stylesheet" type="text/css" href="./css/collapeTree.css">
+
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="./css/collapeTree.css">
+
 </head>
 <body>
 <!-- <div>Association rules visualization test.</div> -->
@@ -34,31 +40,74 @@
   <script src="https://d3js.org/d3.v3.min.js"></script>
   <script src="./mainInstance.js"></script>
   <script src="./directive/bioDirective.js"></script>
-  <script src="./directive/d3Directive.js"></script>
-  <script src="./directive/Controller/understandCtrl.js"></script>
 
-  <div id='question1' ng-controller='understandCtrl as understandCtrl'>
+  <script src="./directive/collapTreeDirective.js"></script>
+  <script src="./directive/collapIndentDirective.js"></script>
+  <script src="./directive/tableToolDirective.js"></script>
+
+  <script src="./directive/Controller/understandCtrl.js"></script>
+  <script src="./directive/Controller/understandIndentCtrl.js"></script>
+
+  <div id='understand1' ng-controller='understandCtrl as understandCtrl'>
+  <div ng-show='startButtonShow == true'>
+      <button ng-click='start()'>start</button>
+      <div>กรุณาใช้กราฟเพื่อเข้าถึงกฎ {Popcorn=Y, Softdrink=Y} --> {Movie_DVD=Y}</div>
+  </div>
     <div ng-show='understandTestShow == true'>
+      <div>กรุณาใช้กราฟเพื่อเข้าถึงกฎ {Popcorn=Y, Softdrink=Y} --> {Movie_DVD=Y}</div>
+      <img src="./resource/complete.png" class="completeIcon" ng-show='completeState == true'>
+      <img src="./resource/collapTree.PNG" class="example1Image">
+
       <understandbox>
-        <graph input-file='./directive/understandRule.json' ></graph>
-        <div>Please find rule {vis, legend} --> {LegendItem}</div>
+        <graph input-file='./directive/understandRule.json' width='700' height='200'></graph>
       </understandbox>
+      
     </div>
   <div>
+
+  <div id='understand2' ng-controller='understandIndentCtrl as understandIndentCtrl'>
+    <button ng-if='startButtonShow == true' ng-click='start()'>start</button>
+    <div ng-show='understandTestShow == true'>
+      <div>กรุณาใช้กราฟเพื่อเข้าถึงกฎ {Popcorn=Y, Softdrink=Y} --> {Movie_DVD=Y}</div>
+      <img src="./resource/complete.png" class="completeIcon" ng-show='completeState == true'>
+      <img src="./resource/indent.PNG" class="example1Image">
+      <indentubox>
+        <indent input-file='./directive/understandRule.json' width='700' height='200' parent-tag="indentubox"></indent>
+      </indentubox>
+    </div>
+  </div>
+
   </div>
 
   <div id='question1' ng-controller='collapeTreeCtrl as collapeTreeCtrl'>
     <div>
       <bio-directive></bio-directive>
     </div>
-    <div ng-if='startStatus == true'>
-      <p>message</p>
+    <button ng-show='startStatus == true' ng-click='start()'>Start</button>
+    <div ng-if='formStatus == true'>
+      <p>จงคลิกกราฟเลือกกฎตามโจทย์ที่กำหนดให้</p>
       <imagebox>
         <graph input-file='rule.json' ></graph>
       </imagebox>
-
-      <p> {{answerChecker[currentQuestion].text}} </p>
+      <div class="questionBox"> โจทย์ ข้อ {{answerChecker[currentQuestion].text}} </div>
     </div>
+  </div>
+
+  <div ng-controller='indentCtrl as indentCtrl'>
+    <button ng-show='startStatus == true' ng-click='startIndent()'>Start</button>
+    <div ng-if='formStatus == true'>
+      <p>จงคลิกกราฟเลือกกฎตามโจทย์ที่กำหนดให้</p>
+      <indentBox>
+        <indent input-file='rule.json'></indent>
+      </indentBox>
+      <div class="questionBox"> โจทย์ ข้อ {{answerChecker[currentQuestion].text}} </div>
+    </div>
+    <!-- <div ng-if='endCredit == true'>{{testData}}</div>
+    <div ng-if='endCredit == true'>กรุณากรอกส่งข้อความด้านบนส่งมาที่ nopphawit.kar@gmail.com</div> -->
+  </div>
+  <div ng-controller='tableCtrl as tableCtrl'>
+    <div>{{isShowButton}}</div>
+    <tabletool></tabletool>
   </div>
 </body>
 </html>
