@@ -7,7 +7,8 @@
     {
      "name": "Softdrink=Y",
      "children": [
-      {"name": "{Movie_DVD=Y}", "size": 3938}
+      {"name": "{Movie_DVD=Y}", "size": 3938},
+      {"name": "{Snack=Y}", "size": 3938}
      ]
     }
    ]

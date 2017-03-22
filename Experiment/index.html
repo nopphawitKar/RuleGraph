@@ -63,7 +63,7 @@
       </understandbox>
       
     </div>
-  <div>
+  </div>
 
   <div id='understand2' ng-controller='understandIndentCtrl as understandIndentCtrl'>
     <button ng-if='startButtonShow == true' ng-click='start()'>start</button>
@@ -77,9 +77,7 @@
     </div>
   </div>
 
-  </div>
-
-  <div id='question1' ng-controller='collapeTreeCtrl as collapeTreeCtrl'>
+  <div id='collap' ng-controller='collapeTreeCtrl as collapeTreeCtrl'>
     <div>
       <bio-directive></bio-directive>
     </div>
@@ -93,7 +91,7 @@
     </div>
   </div>
 
-  <div ng-controller='indentCtrl as indentCtrl'>
+  <div id='indent' ng-controller='indentCtrl as indentCtrl'>
     <button ng-show='startStatus == true' ng-click='startIndent()'>Start</button>
     <div ng-if='formStatus == true'>
       <p>จงคลิกกราฟเลือกกฎตามโจทย์ที่กำหนดให้</p>
@@ -105,8 +103,8 @@
     <!-- <div ng-if='endCredit == true'>{{testData}}</div>
     <div ng-if='endCredit == true'>กรุณากรอกส่งข้อความด้านบนส่งมาที่ nopphawit.kar@gmail.com</div> -->
   </div>
-  <div ng-controller='tableCtrl as tableCtrl'>
-    <div>{{isShowButton}}</div>
+  <div id='table' ng-controller='tableCtrl as tableCtrl'>
+    <!-- <div>{{isShowButton}}</div> -->
     <tabletool></tabletool>
   </div>
 </body>

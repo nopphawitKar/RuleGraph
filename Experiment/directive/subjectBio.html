@@ -2,41 +2,40 @@
 <meta charset="utf-8">
 <html ng-app='collapeTree'>
 <head>
-  <link rel="stylesheet" type="text/css" href="../css/collapeTree.css">
+  <!-- <link rel="stylesheet" type="text/css" href="./css/collapeTree.css"> -->
   <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular.min.js"></script> -->
 </head>
 <body>
-<div>Insert your Bio.</div>
 
   <!-- <script src="https://d3js.org/d3.v3.min.js"></script> -->
   <!-- <script src="./directive/d3Directive.js"></script> -->
 
   <div id='page' class='line' ng-controller='bioController as bioController' ng-show='completeBio==false'>
+  <div>กรอกประวัติของคุณ</div>
     <div>
-      <p class='question'>Years(นักศึกษาชั้นปี)</p>
-      <input type='number' class="inputBox" value='{{subjectBio.year}}'>
+      <p class='question'>คุณเป็นนักศึกษาชั้นปีที่เท่าไร</p>
+      <input type='number' class="inputBox" ng-model='subjectBio.year'>
     </div>
     <div>
-      <p class='question'>How many years do you work or study in data mining?(leave it 0 if you dont have experience.)</p>
-      <input type='number' class="inputBox" value="{{subjectBio.expYear}}">
-      <p class='unit'>years</p> 
+      <p class='question'>คุณมีประสบการณ์ในการเรียนหรือทำงานเกียวกับ data mining เป็นเวลากี่ปี</p>
+      <input type='number' class="inputBox" ng-model="subjectBio.expYear">
+      <p class='unit'>ปี</p> 
     </div>
     <div>
-      <p class='question'>How old are you?</p>
-      <input type='number' class="inputBox" value="{{subjectBio.age}}">
-      <p class='unit'>years</p> 
+      <p class='question'>คุณอายุเท่าไร</p>
+      <input type='number' class="inputBox" ng-model="subjectBio.age">
+      <p class='unit'>ปี</p> 
     </div>
     <div>
-      <p class='question'>Do you know what is association rules?</p>
+      <p class='question'>คุณรู้ว่า association rule คืออะไรใช่หรือไม่</p>
       <input type='checkbox' class="checkbox" ng-model='knowRule' ng-change="knowRuleToggle(knowRule)">
-      <p class="unit">{{subjectBio.knowRule}}</p>
-      <p class='unit'>yes</p>
+      <p class='unit'>ใช่ ฉันรู้</p>
     </div>
     <div>
-      <p class='question'>Gender?</p>
-      <p class='unit'>male</p>
-      <input type='range' class='checkbox' min=0 max=1 value="{{subjectBio.sex}}">
-      <p class='unit'>female</p>
+      <p class='question'>เพศ</p>
+      <p class='unit'>ชาย</p>
+      <input type='range' class='checkbox' min=0 max=1 ng-model="subjectBio.sex">
+      <p class='unit'>หญิง</p>
     </div>
     <button ng-click='submitForm()' class='startButton'>Submit</button>
   </div>

@@ -3,37 +3,34 @@ Module
 .controller('collapeTreeCtrl', ['$scope', '$rootScope', function($scope, $rootScope) {
     var ctrl = this;
     var scope = $scope;
+    var testData;
     // var date = new Date();
     // scope.time = '10.32 sec';
     scope.nodeId = 0;
     scope.timeCapture = {start: 0, end: 0};
     scope.startStatus = false;
+    scope.formStatus =false;
+    // scope.currentForm = 0;
   	scope.answerChecker = [	{text: '1) {Sausage=Y} --> {Snack=Y,Soft_drink=Y}', id: 20}, 
-  							{text: '2) {Yogurt=Y} --> {Snack=Y,Soft_drink=Y,Soap=Y}', id: 24},
-  							{text: '3) {Soft_drink=Y, Shampoo=Y} --> {Snack=Y,Tooth_paste=Y}', id: 105},
-  							{text: '4) {Ice_cream=Y} --> {Snack=Y,Chocolate=Y}', id: 118},
-  							{text: '5) {Chocolate=Y, Ice_cream=Y} --> {Soft_drink=Y}', id: 145},
-  							{text: '6) {Chocolate=Y, Soap=Y, Tooth_brush=Y} --> {Tooth_paste=Y}', id: 152},
-  							{text: '7) {Milk=Y, Yogurt=Y} --> {Snack=Y,Soft_drink=Y}', id: 177},
-  							{text: '8) {Tooth_brush=Y, Milk=Y, Ice_cream=Y} --> {Tooth_paste=Y}', id: 233},
-  							{text: '9) {Snack=Y, Chocolate=Y, Ice_cream=Y} --> {Soft_drink=Y}', id: 302},
-  							{text: '10) {Shampoo=Y, Milk=Y, } --> {Tooth_brush=Y,Tooth_paste=Y}', id: 339},
+  							// {text: '2) {Yogurt=Y} --> {Snack=Y,Soft_drink=Y,Soap=Y}', id: 24},
+  							// {text: '3) {Soft_drink=Y, Shampoo=Y} --> {Snack=Y,Tooth_paste=Y}', id: 105},
+  							// {text: '4) {Ice_cream=Y} --> {Snack=Y,Chocolate=Y}', id: 118},
+  							// {text: '5) {Chocolate=Y, Ice_cream=Y} --> {Soft_drink=Y}', id: 145},
+  							// {text: '6) {Chocolate=Y, Soap=Y, Tooth_brush=Y} --> {Tooth_paste=Y}', id: 152},
+  							// {text: '7) {Milk=Y, Yogurt=Y} --> {Snack=Y,Soft_drink=Y}', id: 177},
+  							// {text: '8) {Tooth_brush=Y, Milk=Y, Ice_cream=Y} --> {Tooth_paste=Y}', id: 233},
+  							// {text: '9) {Snack=Y, Chocolate=Y, Ice_cream=Y} --> {Soft_drink=Y}', id: 302},
+  							// {text: '10) {Shampoo=Y, Milk=Y, } --> {Tooth_brush=Y,Tooth_paste=Y}', id: 339},
   							{text: 'complete', id: 'no id'}
-  							]//{'1) {bruises?=f, class=p} {ring-number=o}', 29};
+  							]
   	scope.currentQuestion = 0;
-    // ctrl.completeAnswer = &#9989;
 
- //    scope.$watch('nodeId', function(newValue){
-	// 	console.log(newValue + 'in controller');
-	// });
 	var isCorrectNode = function(node) {
 		var depth = node.depth;
 		var ruleName = '}-->' + node.name;
 		var currentNode = node;
 		for(var index=1; index < depth; index++){
-			// ruleName = node.parent.
 			if(index == depth-1){
-				// ruleName = '{' + ruleName + '}-->' + node.parent.name;
 				ruleName = '{' + currentNode.parent.name + ruleName;
 			}else{
 				ruleName = ',' + currentNode.parent.name + ruleName;
@@ -50,7 +47,6 @@ Module
 			compareTxt += words[index];
 		}
 
-		/////////////
 		if(ruleName.localeCompare(compareTxt)==0){
 			return true;
 		}
@@ -58,38 +54,38 @@ Module
 	};
 
 	scope.start = function(){
-		scope.startStatus = true;
+		scope.startStatus = false;
+		scope.formStatus = true;
 		var date = new Date();
 		scope.timeCapture.start = date.getTime();
 	};
 	scope.$on('changeNode', function(events, node){
-    	// console.log(args);
-    	// scope.nodeId = args;
-    	// scope.$digest();
-    	if(/*scope.answerChecker[scope.currentQuestion].id == args*/isCorrectNode(node)){
-    		if(scope.currentQuestion == 9){
+    	if(isCorrectNode(node)){
+    		if(scope.currentQuestion == scope.answerChecker.length-2/*9*//*0*/){
     			var date = new Date();
     			scope.timeCapture.end = date.getTime();
     			var timeConsume = scope.timeCapture.end - scope.timeCapture.start;
-    			scope.answerChecker[10].text = 'You use time ' + timeConsume + 'Milliseconds';
+    			scope.answerChecker[scope.answerChecker.length-1/*10*//*1*/].text = 'collapse tree :You use time ' + timeConsume + 'Milliseconds';
+    			testData.push(scope.answerChecker[scope.answerChecker.length-1/*10*//*1*/].text);
+    			// console.log(scope.answerChecker[/*10*/1].text)
+    			scope.formStatus = false;
+    			$rootScope.$emit('callIndent', testData);
     		}
     		scope.currentQuestion += 1;
     	}
     	scope.$digest();
   	});
 
-  	$rootScope.$on('callLearnForm', function(events, startStatus){
-  		scope.start();
+  	$rootScope.$on('callLearnForm', function(events, testDataInput){
+  		// scope.start();
+  		testData = testDataInput;
+  		scope.startStatus = true;
 	});
 
 	scope.$watch('nodeId', function(newValue){
 		scope.nodeId = newValue;
 	}, true);
-    // scope.getTime = function(){
-    //   scope.time = 'this is time';
-    //   console.log('time');
-    //   // return ctrl.time;
-    // };
+
 
     scope.isTrueAns = function(){
       var answer = document.getElementById("answerTab").innerHTML;
@@ -100,10 +96,6 @@ Module
       return false;
     }
 
-    scope.addTimeUnit = function(){
-      // scope.nodeId = '99997687';
-      return '10 sec';
-    };
   }])
 
 
@@ -114,16 +106,18 @@ return {
 	scope: {
   		// val: '=',
   		// grouped: '=',
-  		nodeId: '=',
-  		updateNode: '&updateNode',
-  		inputFile: '@'
+  		inputFile: '@',
+  		width: '=',
+  		height: '='
 	},
 	link: function (scope, element, attrs) {
-		// scope.nodeId = 0;
-
 		var margin = {top: 20, right: 120, bottom: 20, left: 120},
 	    width = 960 - margin.right - margin.left,
 	    height = 800 - margin.top - margin.bottom;
+	    if(scope.width > 0 && scope.height > 0){
+	    	width = scope.width;
+	    	height = scope.height;
+	    }
 
 		var i = 0,
 		    duration = 750,
@@ -254,16 +248,8 @@ return {
 
 		// Toggle children on click.
 		function click(d) {
-		  console.log(d);
-		  // scope.nodeId = d.id;
-		  // scope.updateNode();
 		  scope.$emit('changeNode', d);
-		   // if(d.id == 14){
-		   //    document.getElementById("completeStatus").innerHTML = String.fromCharCode(9989);
-		   // }
-		    // document.getElementById("answerTab").innerHTML = d.id;
-		  // }
-		  // 
+
 		  if (d.children) {
 		    d._children = d.children;
 		    d.children = null;

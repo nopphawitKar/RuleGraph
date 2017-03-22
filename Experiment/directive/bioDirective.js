@@ -1,6 +1,6 @@
 Module
 
-	.controller('bioController', ['$scope', function($scope) {
+	.controller('bioController', ['$scope','$rootScope', function($scope, $rootScope) {
 		var scope = $scope;
 		scope.completeBio = false;
 		scope.subjectBio = {year: 0,
@@ -14,8 +14,13 @@ Module
 
 		scope.submitForm = function(){
 			scope.completeBio = true;
-			scope.$emit('callTestForm', true);
+			// console.log(scope.subjectBio.year);
+			$rootScope.$emit('callTestForm', scope.subjectBio);
 		}
+
+		scope.$watch('subjectBio', function(newVal, oldVal){
+		    console.log(newVal);
+		}, true);
 	}])
 
 

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html ng-app='table'>
+<link rel="stylesheet" type="text/css" href="./bootstrap-4.0.0-alpha.6-dist/css/bootstrap.min.css">
+<style>
+
+.column {
+  float: left;
+  width: 400px;
+}
+
+.selected {
+  background-color: lightgreen;
+}
+
+.columnDiv {
+  float: left;
+  width: 400px;
+  height: 2px;
+  font-size: 2px;
+}
+</style>
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular.min.js"></script>
+  <script type="text/javascript" src="./data.js"></script>
+  <script type="text/javascript" src="./tableCtrl.js"></script>
+</head>
+<body>
+<div ng-controller="tableCtrl as tableCtrl" class="column">
+  <div class="list-group column" ng-repeat="column in tableData track by $index" >
+    <div class="list-group-item columnDiv" 
+      ng-class="{'list-group-item-success': selected[$parent.$index]==$index,
+      'list-group-item-info': selected[$parent.$index]==$index && isEndRule($parent.$index, $index),
+      'columnDiv list-group-item-warning':selected[$parent.$index]!=$index}" 
+      ng-repeat="row in column track by $index" 
+      ng-click="createColumn($parent.$index, $index)" 
+      ng-show="isShowRow($parent.$index, $index)">{{row.name}}</div>
+    
+  </div>
+  <div>{{getAnswer()}}</div>
+</div>
+</body>
+</html>

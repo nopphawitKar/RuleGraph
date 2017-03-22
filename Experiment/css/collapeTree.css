@@ -13,10 +13,11 @@
 .inputBox{
 	/*clear: both;*/
 	float: left;
-	margin-top: 15px;
+	/*margin-top: 15px;*/
 	/*margin-left: 10px;*/
 	margin-right: 10px;
 	width: 40px;
+	height: 20px;
 	/*position: relative;*/
 	display: block;
 }
@@ -32,9 +33,71 @@
 .unit{
 	/*margin-left: 10px;*/
 	float: left;
+	margin-right: 10px;
 }
 
 .checkbox{
-	margin-top:20px;
+	margin-top:6px;
 	float: left;
+	margin-right: 10px;
+}
+
+.example1Image{
+	margin-left: 60px;
+}
+
+.completeIcon{
+	float: right;
+	width: 100px;
+	height: 100px;
+}
+
+.questionBox{
+	width: 600px;
+	height: 300px;
+	position: fixed;
+	top: 100px;
+    right: 0px;
+    z-index: -1;
+}
+
+indentbox > svg {
+	height: 10000px;
+}
+
+/*indent css*/
+.node rect {
+  cursor: pointer;
+  fill: #fff;
+  fill-opacity: .5;
+  stroke: #3182bd;
+  stroke-width: 1.5px;
+}
+
+.node text {
+  font: 10px sans-serif;
+  pointer-events: none;
+}
+
+path.link {
+  fill: none;
+  stroke: #9ecae1;
+  stroke-width: 1.5px;
+}
+
+/*////////////////////////////*/
+.column {
+  float: left;
+  width: 400px;
+}
+
+.selected {
+  background-color: lightgreen;
+}
+
+.columnDiv {
+  float: left;
+  width: 400px;
+  height: 2px;
+  font-size: 2px;
 }
