@@ -59,6 +59,10 @@ Module
 				scope.tableData.push(scope.getSelectedChildren());
 			};
 		}
+
+		if(scope.isCorrectNode()){
+			scope.currentQuestion++;
+		}
 	}
 
 	scope.getSelectedChildren = function(){
@@ -115,12 +119,16 @@ Module
   		// scope.startStatus = true;
 	});
 
+	$rootScope.$on('useUnderstandInput', function(events){
+		data = {"name": "","children": [{"name": "Popcorn=Y","children": [{"name": "Softdrink=Y","children": [{"name": "{Movie_DVD=Y}", "size": 3938},{"name": "{Snack=Y}", "size": 3938}]}]}]};
+	});
+	
 	scope.start = function(){
 		scope.isShow.startButton = false;
 		scope.isShow.form = true;
 	};
   	/////////////////////////////////////////////////////////////////////////////////////
-  	var isCorrectNode = function() {
+  	scope.isCorrectNode = function() {
 		// var depth = node.depth;
 		// var ruleName = '}-->' + node.name;
 		var ruleName = '}-->' + scope.answerList[scope.answerList.length-1];
@@ -156,7 +164,7 @@ Module
 return {
 	restrict: 'E',
 	scope: {
-  		// val: '=',
+  		understand: '=',
   		// grouped: '=',
   		// inputFile: '@',
   		// width: '=',
@@ -164,7 +172,12 @@ return {
 	},
 	templateUrl: './directive/tableTool.html',
 	link: function(scope) {
-
+		scope.$watch('understand', function(value) {
+      		// scope.show = value;
+      		if(understand == true){
+      			scope.$emit('useUnderstandInput');
+      		}
+    	});
 	}
 }
 });

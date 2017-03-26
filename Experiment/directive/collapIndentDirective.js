@@ -80,9 +80,9 @@ Module
   		scope.$digest();
 	});
 
-  	scope.startIndent = function(){
-  		scope.formStatus = true;
-  	}
+  	// scope.startIndent = function(){
+  	// 	scope.formStatus = true;
+  	// }
   }])
 
 

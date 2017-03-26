@@ -5,6 +5,7 @@
 <div ng-controller="tableCtrl as tableCtrl" class="column">
   <button ng-if='isShow.startButton' ng-click='start()'>start</button>
   <div ng-if='isShow.form'>
+  <div class="questionBox">{{answerChecker[currentQuestion].text}}</div>
   <div>
     <div class="list-group column" ng-repeat="column in tableData track by $index" >
       <div class="list-group-item columnDiv" 
