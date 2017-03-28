@@ -69,7 +69,10 @@ Module
 				var timeConsume = scope.timeCapture.end - scope.timeCapture.start;
 				var resultMessage = 'TableTool: You use time ' + timeConsume + 'Milliseconds';
 				scope.testData.push(resultMessage);
-				sendEmail(scope.testData);
+				scope.isShow.startButton = false;
+				scope.isShow.form = false;
+				scope.$emit('changePage', scope.testData);
+				// sendEmail(scope.testData);
 			}
 		}
 	}
@@ -118,7 +121,7 @@ Module
 		return answer;
 	}
 
-	$rootScope.$on('callTableTool', function(events, testDataInput){
+	$rootScope.$on('learn3', function(events, testDataInput){
   		scope.testData = testDataInput;
   		scope.isShow.startButton = true;
   		scope.$digest();
@@ -165,19 +168,8 @@ Module
 return {
 	restrict: 'E',
 	scope: {
-  		understand: '=',
-  		// grouped: '=',
-  		// inputFile: '@',
-  		// width: '=',
-  		// height: '='
+  		understand: '='
 	},
-	templateUrl: './directive/tableTool.html',
-	link: function(scope) {
-		// scope.$watch('understand', function(value) {
-  //     		if(understand == true){
-  //     			scope.$emit('useUnderstandInput');
-  //     		}
-  //   	});
-	}
+	templateUrl: './directive/tableTool.html'
 }
 });

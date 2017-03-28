@@ -38,8 +38,6 @@ Module
 			currentNode = currentNode.parent;
 		}
 
-
-		///////////////////////////
 		var words = scope.answerChecker[scope.currentQuestion].text.split(' ');
 		var compareTxt = '';
 		for(index in words){
@@ -65,19 +63,17 @@ Module
     			var date = new Date();
     			scope.timeCapture.end = date.getTime();
     			var timeConsume = scope.timeCapture.end - scope.timeCapture.start;
-    			scope.answerChecker[scope.answerChecker.length-1/*10*//*1*/].text = 'collapse tree :You use time ' + timeConsume + 'Milliseconds';
-    			testData.push(scope.answerChecker[scope.answerChecker.length-1/*10*//*1*/].text);
-    			// console.log(scope.answerChecker[/*10*/1].text)
+    			var resultMessage = 'collapse tree :You use time ' + timeConsume + 'Milliseconds';
+    			testData.push(resultMessage);
     			scope.formStatus = false;
-    			$rootScope.$emit('callIndent', testData);
+    			$rootScope.$emit('changePage', testData);
     		}
     		scope.currentQuestion += 1;
     	}
     	scope.$digest();
   	});
 
-  	$rootScope.$on('callLearnForm', function(events, testDataInput){
-  		// scope.start();
+  	$rootScope.$on('learn1', function(events, testDataInput){
   		testData = testDataInput;
   		scope.startStatus = true;
 	});
@@ -104,8 +100,6 @@ Module
 return {
 	restrict: 'E',
 	scope: {
-  		// val: '=',
-  		// grouped: '=',
   		inputFile: '@',
   		width: '=',
   		height: '='

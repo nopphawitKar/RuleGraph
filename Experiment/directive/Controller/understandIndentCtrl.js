@@ -20,7 +20,7 @@ Module
         scope.completeState = true;
         $timeout(function(){
             scope.understandTestShow = false;
-            $rootScope.$emit('callLearnForm', testData);
+            $rootScope.$emit('changePage', testData);
         }, 1000);
       };
 
@@ -29,14 +29,13 @@ Module
           var date = new Date();
           scope.timeCapture.end = date.getTime();
           var timeSpend = scope.timeCapture.end - scope.timeCapture.start;
-          // console.log('Understandbility Test2 Complete. You spend ' + timeSpend + 'MilliSeconds');
           testData.push('Understandbility Test2 Complete. You spend ' + timeSpend + 'MilliSeconds');
           scope.closeFormDelay();
         }
         scope.$digest();
       });
 
-      $rootScope.$on('callUnderstand2', function(events, testDataInput){
+      $rootScope.$on('cognition2', function(events, testDataInput){
         // start();
         testData = testDataInput;
         scope.startButtonShow = true;

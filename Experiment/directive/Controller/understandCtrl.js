@@ -16,11 +16,10 @@ Module
       }
 
       scope.closeFormDelay = function(){
-        // scope.understandTestShow = 'delay';
         scope.completeState = true;
         $timeout(function(){
             scope.understandTestShow = false;
-            $rootScope.$emit(/*'callLearnForm'*/'callUnderstand2', testData/*true*/);
+            $rootScope.$emit('changePage', testData);
         }, 1000);
       };
 
@@ -37,8 +36,7 @@ Module
         scope.$digest();
       });
 
-      $rootScope.$on('callTestForm', function(events, prevData){
-        // start();
+      $rootScope.$on('cognition1', function(events, prevData){
         testData.push(prevData);
         scope.startButtonShow = true;
       });

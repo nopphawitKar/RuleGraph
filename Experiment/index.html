@@ -55,7 +55,10 @@
   <script src="./directive/Controller/understandCtrl.js"></script>
   <script src="./directive/Controller/understandIndentCtrl.js"></script>
   <div ng-controller='mainCtrl as mainCtrl'>
-
+    <div>
+      <bio-directive></bio-directive>
+    </div>
+  
     <div id='understand1' ng-controller='understandCtrl as understandCtrl'>
     <div ng-show='startButtonShow == true'>
         <button ng-click='start()'>start</button>
@@ -86,9 +89,6 @@
     </div>
 
     <div id='collap' ng-controller='collapeTreeCtrl as collapeTreeCtrl'>
-      <div>
-        <bio-directive></bio-directive>
-      </div>
       <button ng-show='startStatus == true' ng-click='start()'>Start</button>
       <div ng-if='formStatus == true'>
         <p>จงคลิกกราฟเลือกกฎตามโจทย์ที่กำหนดให้</p>

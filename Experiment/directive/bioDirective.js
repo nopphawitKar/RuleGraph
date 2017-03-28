@@ -14,8 +14,8 @@ Module
 
 		scope.submitForm = function(){
 			scope.completeBio = true;
-			// console.log(scope.subjectBio.year);
-			$rootScope.$emit('callTestForm', scope.subjectBio);
+			// $rootScope.$emit('callTestForm', scope.subjectBio);
+			$rootScope.$emit('changePage', scope.subjectBio);
 		}
 
 		scope.$watch('subjectBio', function(newVal, oldVal){
@@ -29,8 +29,6 @@ Module
 		return {
 			restrict: 'E',
 			scope: {
-		  		// val: '=',
-		  		// grouped: '=',
 			},
 			templateUrl: './directive/subjectBio.html'
 		}

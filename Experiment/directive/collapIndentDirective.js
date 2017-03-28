@@ -26,9 +26,7 @@ Module
 		var ruleName = '}-->' + node.name;
 		var currentNode = node;
 		for(var index=1; index < depth; index++){
-			// ruleName = node.parent.
 			if(index == depth-1){
-				// ruleName = '{' + ruleName + '}-->' + node.parent.name;
 				ruleName = '{' + currentNode.parent.name + ruleName;
 			}else{
 				ruleName = ',' + currentNode.parent.name + ruleName;
@@ -57,32 +55,28 @@ Module
 	};
 	scope.$on('changeIndentNode', function(events, node){
     	if(isCorrectNode(node)){
-    		if(scope.currentQuestion == scope.answerChecker.length-2/*9*//*0*/){
+    		if(scope.currentQuestion == scope.answerChecker.length-2){
     			var date = new Date();
     			scope.timeCapture.end = date.getTime();
     			var timeConsume = scope.timeCapture.end - scope.timeCapture.start;
-    			scope.answerChecker[scope.answerChecker.length - 1/*10*//*1*/].text = 'Indent: You use time ' + timeConsume + 'Milliseconds';
-    			scope.testData.push(scope.answerChecker[scope.answerChecker.length - 1/*10*//*1*/].text);
+    			var resultMessage = 'Indent: You use time ' + timeConsume + 'Milliseconds';
+    			scope.testData.push(resultMessage);
     			scope.formStatus = false
     			scope.startStatus = false
-    			// scope.endCredit = true;
-    			$rootScope.$emit('callTableTool', scope.testData);
+    			$rootScope.$emit('changePage', scope.testData);
     		}
     		scope.currentQuestion += 1;
     	}
     	scope.$digest();
   	});
 
-  	$rootScope.$on('callIndent', function(events, testDataInput){
+  	$rootScope.$on('learn2', function(events, testDataInput){
   		// scope.start();
   		scope.testData = testDataInput;
   		scope.startStatus = true;
   		scope.$digest();
 	});
 
-  	// scope.startIndent = function(){
-  	// 	scope.formStatus = true;
-  	// }
   }])
 
 
@@ -91,8 +85,6 @@ Module
 return {
 	restrict: 'E',
 	scope: {
-  		// val: '=',
-  		// grouped: '=',
   		inputFile: '@',
   		width: '=',
   		height: '=',
