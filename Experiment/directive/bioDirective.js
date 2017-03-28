@@ -2,7 +2,7 @@ Module
 
 	.controller('bioController', ['$scope','$rootScope', function($scope, $rootScope) {
 		var scope = $scope;
-		scope.completeBio = false;
+		scope.isShow = false;
 		scope.subjectBio = {year: 0,
 							expYear: 0,
 							age: 0,
@@ -13,14 +13,21 @@ Module
 		}
 
 		scope.submitForm = function(){
-			scope.completeBio = true;
-			// $rootScope.$emit('callTestForm', scope.subjectBio);
-			$rootScope.$emit('changePage', scope.subjectBio);
+			scope.isShow = false;
+			$rootScope.$emit( 'changePage', JSON.stringify(scope.subjectBio) );
 		}
 
-		scope.$watch('subjectBio', function(newVal, oldVal){
-		    console.log(newVal);
-		}, true);
+		$rootScope.$on('bio', function(events){
+			scope.isShow = true;
+			
+			if (!$scope.$$phase){
+				$scope.$apply();
+			}
+		});
+
+		// scope.$watch('subjectBio', function(newVal, oldVal){
+		//     console.log(newVal);
+		// }, true);
 	}])
 
 
@@ -30,6 +37,6 @@ Module
 			restrict: 'E',
 			scope: {
 			},
-			templateUrl: './directive/subjectBio.html'
+			templateUrl: './directive/html/subjectBio.html'
 		}
 	});

@@ -28,8 +28,11 @@ function handleAuthClick() {
 function handleAuthResult(authResult) {
   if(authResult && !authResult.error) {
     loadGmailApi();
-    $('#authorize-button').remove();
-    $('#compose-button').removeClass("hidden");
+    // $('#authorize-button').remove();
+    $('#authorize-button').on('click', function(){
+      // handleAuthClick();
+      angular.element(document.getElementById('manual')).scope().closeManual();
+    });
   } else {
     $('#authorize-button').removeClass("hidden");
     $('#authorize-button').on('click', function(){

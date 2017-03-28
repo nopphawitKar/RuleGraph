@@ -8,22 +8,33 @@
 	float: left;
 	position: relative;
 	display: inline-block;
+	margin: 0 auto;
 	margin-right: 10px;
+	margin-bottom: 20px;
+	margin-left: 150px;
 }
 .inputBox{
-	/*clear: both;*/
 	float: left;
-	/*margin-top: 15px;*/
-	/*margin-left: 10px;*/
 	margin-right: 10px;
 	width: 40px;
 	height: 20px;
-	/*position: relative;*/
 	display: block;
+	border-radius: 4px;
+	border: 1px solid #ccc;
+	/*float: left;
+	width: 40px;
+	height: 20px;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;*/
 }
 
 .line{
-	position: absolute;
+	/*position: absolute;*/
+	margin-bottom: 10px;
 }
 
 .relative{
@@ -100,4 +111,54 @@ path.link {
   width: 400px;
   height: 2px;
   font-size: 2px;
+}
+
+/*manual*/
+.manualPaper {
+	/*margin-top: 50px;
+	margin-left: 150px;
+	margin-right: 150px;*/
+	margin: 0 auto;
+	width: 800px;
+	height: 100%;
+}
+
+.centreText {
+	text-align: center;
+	/*text-indent: 50px;*/
+	margin-bottom: 30px;
+	margin-top: 50px;
+}
+
+.manualbullet {
+	text-indent: 50px;
+	margin-bottom: 10px;
+}
+
+.centreButton {
+	clear: both;
+	margin: 0 auto;
+	margin-top: 50px;
+	width: 100px;
+	/*position:absolute;*/
+	bottom:0;
+}
+
+.centreItem {
+	clear: both;
+	margin: 0 auto;
+}
+
+p {
+    font-family: arial,sans-serif;
+    float: left;
+    margin-right: 10px;
+}
+
+.newLine {
+	clear: both;
+}
+
+.bold {
+	font-weight: bold;
 }

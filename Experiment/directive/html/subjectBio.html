@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html ng-app='collapeTree'>
+<head>
+</head>
+<body>
+  <div id='page' class='manualPaper' ng-controller='bioController as bioController' ng-show='isShow==true'>
+  <h2 class="centreText">กรอกประวัติของคุณ</h2>
+    <div class="line">
+      <div class='question'>คุณเป็นนักศึกษาชั้นปีที่เท่าไร</div>
+      <input type='number' class="inputBox" ng-model='subjectBio.year'>
+    </div>
+    <div class="line">
+      <div class='question'>คุณมีประสบการณ์ในการเรียนหรือทำงานเกียวกับ data mining เป็นเวลากี่ปี</div>
+      <input type='number' class="inputBox" ng-model="subjectBio.expYear">
+      <div class='unit'>ปี</div> 
+    </div>
+    <div class="line">
+      <div class='question'>คุณอายุเท่าไร</div>
+      <input type='number' class="inputBox" ng-model="subjectBio.age">
+      <div class='unit'>ปี</div> 
+    </div>
+    <div class="line">
+      <div class='question'>คุณรู้ว่า association rule คืออะไรใช่หรือไม่</div>
+      <input type='checkbox' class="checkbox" ng-model='knowRule' ng-change="knowRuleToggle(knowRule)">
+      <div class='unit'>ใช่ ฉันรู้</div>
+    </div>
+    <div class="line">
+      <div class='question'>เพศ</div>
+      <div class='unit'>ชาย</div>
+      <input type='range' class='checkbox' min=0 max=1 ng-model="subjectBio.sex">
+      <div class='unit'>หญิง</div>
+    </div>
+    <div class="centreButton">
+      <button ng-click='submitForm()' class='btn btn-primary'>Submit</button>
+    </div>
+  </div>
+</body>
+</html>

@@ -2,8 +2,13 @@
 <!-- <script type="text/javascript" src="./tableCtrl.js"></script> -->
 <!-- <p>xxx</p> -->
 <link rel="stylesheet" type="text/css" href="./css/bootstrap-4.0.0-alpha.6-dist/css/bootstrap.min.css">
-<div ng-controller="tableCtrl as tableCtrl" class="column">
-  <button ng-if='isShow.startButton' ng-click='start()'>start</button>
+<div ng-controller="tableCtrl as tableCtrl">
+  <div class="centreText" ng-show = "isShow.startButton || isShow.form">
+    <a class="bold"> จงคลิกกราฟเลือกกฎตามโจทย์ที่กำหนดให้</a>
+  </div>
+  <div class="centreButton">
+    <button ng-if='isShow.startButton' ng-click='start()' class="btn btn-primary newLine">start</button>
+  </div>
   <div ng-if='isShow.form'>
   <div class="questionBox">{{answerChecker[currentQuestion].text}}</div>
   <div>

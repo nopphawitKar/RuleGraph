@@ -45,6 +45,7 @@
   <script src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
 
   <script src="./directive/preventRightClickDirective.js"></script>
+  <script src="./directive/manualDirective.js"></script>
   <script src="./directive/bioDirective.js"></script>
   <script src="./directive/collapTreeDirective.js"></script>
   <script src="./directive/collapIndentDirective.js"></script>
@@ -56,18 +57,28 @@
   <script src="./directive/Controller/understandIndentCtrl.js"></script>
   <div ng-controller='mainCtrl as mainCtrl'>
     <div>
+      <manual></manual>
+    </div>
+    <div>
       <bio-directive></bio-directive>
     </div>
   
     <div id='understand1' ng-controller='understandCtrl as understandCtrl'>
+    <div class="centreText" ng-show = "startButtonShow || understandTestShow">
+      <a >กรุณาใช้กราฟเพื่อเข้าถึงกฎ</a> 
+      <a class="bold"> {Popcorn=Y, Softdrink=Y} --> {Movie_DVD=Y}</a>
+      <a>กดปุ่ม Start เมื่อพร้อมทำแบบทดสอบ</a>
+    </div>
     <div ng-show='startButtonShow == true'>
-        <button ng-click='start()'>start</button>
-        <div>กรุณาใช้กราฟเพื่อเข้าถึงกฎ {Popcorn=Y, Softdrink=Y} --> {Movie_DVD=Y}</div>
+        
+        <div class="centreButton">
+          <button ng-click='start()' class="btn btn-primary newLine">start</button>
+        </div>
     </div>
       <div ng-show='understandTestShow == true'>
-        <div>กรุณาใช้กราฟเพื่อเข้าถึงกฎ {Popcorn=Y, Softdrink=Y} --> {Movie_DVD=Y}</div>
+       
         <img src="./resource/complete.png" class="completeIcon" ng-show='completeState == true'>
-        <img src="./resource/collapTree.PNG" class="example1Image">
+        <img src="./resource/collapTree.PNG" class="example1Image centreItem">
 
         <understandbox>
           <graph input-file='./directive/understandRule.json' width='700' height='200'></graph>
@@ -77,9 +88,15 @@
     </div>
 
     <div id='understand2' ng-controller='understandIndentCtrl as understandIndentCtrl'>
-      <button ng-if='startButtonShow == true' ng-click='start()'>start</button>
+      <div class="centreText" ng-show = "startButtonShow || understandTestShow">
+        <a >กรุณาใช้กราฟเพื่อเข้าถึงกฎ</a> 
+        <a class="bold"> {Popcorn=Y, Softdrink=Y} --> {Movie_DVD=Y}</a>
+        <a>กดปุ่ม Start เมื่อพร้อมทำแบบทดสอบ</a>
+      </div>
+      <div class="centreButton">
+        <button ng-if='startButtonShow == true' ng-click='start()' class="btn btn-primary newLine">start</button>
+      </div>
       <div ng-show='understandTestShow == true'>
-        <div>กรุณาใช้กราฟเพื่อเข้าถึงกฎ {Popcorn=Y, Softdrink=Y} --> {Movie_DVD=Y}</div>
         <img src="./resource/complete.png" class="completeIcon" ng-show='completeState == true'>
         <img src="./resource/indent.PNG" class="example1Image">
         <indentubox>
@@ -89,9 +106,13 @@
     </div>
 
     <div id='collap' ng-controller='collapeTreeCtrl as collapeTreeCtrl'>
-      <button ng-show='startStatus == true' ng-click='start()'>Start</button>
+      <div class="centreText" ng-show = "startStatus || formStatus">
+        <a class="bold"> จงคลิกกราฟเลือกกฎตามโจทย์ที่กำหนดให้</a>
+      </div>
+      <div class="centreButton">
+        <button ng-show='startStatus == true' ng-click='start()' class="btn btn-primary newLine">Start</button>
+      </div>
       <div ng-if='formStatus == true'>
-        <p>จงคลิกกราฟเลือกกฎตามโจทย์ที่กำหนดให้</p>
         <imagebox>
           <graph input-file='rule.json' ></graph>
         </imagebox>
@@ -100,10 +121,13 @@
     </div>
 
     <div id='indent' ng-controller='indentCtrl as indentCtrl'>
-      <button ng-show='startStatus == true' ng-click='start()'>Start</button>
+      <div class="centreText" ng-show = "startStatus || formStatus">
+        <a class="bold"> จงคลิกกราฟเลือกกฎตามโจทย์ที่กำหนดให้</a>
+      </div>
+      <div class="centreButton">
+        <button ng-show='startStatus == true' ng-click='start()' class="btn btn-primary newLine">Start</button>
+      </div>
       <div ng-if='formStatus == true'>
-        <!-- <a>this is startStatus {{startStatus}}</a> -->
-        <p>จงคลิกกราฟเลือกกฎตามโจทย์ที่กำหนดให้</p>
         <indentBox>
           <indent input-file='rule.json'></indent>
         </indentBox>
