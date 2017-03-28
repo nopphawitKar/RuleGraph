@@ -35,10 +35,14 @@
 
 </head>
 <body>
-<!-- <div>Association rules visualization test.</div> -->
-
   <script src="https://d3js.org/d3.v3.min.js"></script>
+  <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+
   <script src="./mainInstance.js"></script>
+
+  <script src="./directive/js/mailService.js"></script>
+
+  <script src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
 
   <script src="./directive/preventRightClickDirective.js"></script>
   <script src="./directive/bioDirective.js"></script>
@@ -46,6 +50,7 @@
   <script src="./directive/collapIndentDirective.js"></script>
   <script src="./directive/tableToolDirective.js"></script>
 
+  <!-- <script src="./directive/Controller/mock.js"></script> -->
   <script src="./directive/Controller/mainCtrl.js"></script>
   <script src="./directive/Controller/understandCtrl.js"></script>
   <script src="./directive/Controller/understandIndentCtrl.js"></script>
@@ -104,8 +109,6 @@
         </indentBox>
         <div class="questionBox"> โจทย์ ข้อ {{answerChecker[currentQuestion].text}} </div>
       </div>
-      <!-- <div ng-if='endCredit == true'>{{testData}}</div>
-      <div ng-if='endCredit == true'>กรุณากรอกส่งข้อความด้านบนส่งมาที่ nopphawit.kar@gmail.com</div> -->
     </div>
 
     <div id='table' ng-controller='tableCtrl as tableCtrl'>

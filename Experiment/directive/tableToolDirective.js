@@ -8,21 +8,21 @@ Module
     scope.testData = [];
 
     // scope.nodeId = 0;
-    // scope.timeCapture = {start: 0, end: 0};
+    scope.timeCapture = {start: 0, end: 0};
     // scope.startStatus = false;
     // scope.formStatus =false;
     scope.isShow = {'startButton': false, 'form': false}
     // scope.isShowButton = false;
   	scope.answerChecker = [	{text: '1) {Sausage=Y} --> {Snack=Y,Soft_drink=Y}', id: 20}, 
-  							{text: '2) {Yogurt=Y} --> {Snack=Y,Soft_drink=Y,Soap=Y}', id: 24},
-  							{text: '3) {Soft_drink=Y, Shampoo=Y} --> {Snack=Y,Tooth_paste=Y}', id: 105},
-  							{text: '4) {Ice_cream=Y} --> {Snack=Y,Chocolate=Y}', id: 118},
-  							{text: '5) {Chocolate=Y, Ice_cream=Y} --> {Soft_drink=Y}', id: 145},
-  							{text: '6) {Chocolate=Y, Soap=Y, Tooth_brush=Y} --> {Tooth_paste=Y}', id: 152},
-  							{text: '7) {Milk=Y, Yogurt=Y} --> {Snack=Y,Soft_drink=Y}', id: 177},
-  							{text: '8) {Tooth_brush=Y, Milk=Y, Ice_cream=Y} --> {Tooth_paste=Y}', id: 233},
-  							{text: '9) {Snack=Y, Chocolate=Y, Ice_cream=Y} --> {Soft_drink=Y}', id: 302},
-  							{text: '10) {Shampoo=Y, Milk=Y, } --> {Tooth_brush=Y,Tooth_paste=Y}', id: 339},
+  							// {text: '2) {Yogurt=Y} --> {Snack=Y,Soft_drink=Y,Soap=Y}', id: 24},
+  							// {text: '3) {Soft_drink=Y, Shampoo=Y} --> {Snack=Y,Tooth_paste=Y}', id: 105},
+  							// {text: '4) {Ice_cream=Y} --> {Snack=Y,Chocolate=Y}', id: 118},
+  							// {text: '5) {Chocolate=Y, Ice_cream=Y} --> {Soft_drink=Y}', id: 145},
+  							// {text: '6) {Chocolate=Y, Soap=Y, Tooth_brush=Y} --> {Tooth_paste=Y}', id: 152},
+  							// {text: '7) {Milk=Y, Yogurt=Y} --> {Snack=Y,Soft_drink=Y}', id: 177},
+  							// {text: '8) {Tooth_brush=Y, Milk=Y, Ice_cream=Y} --> {Tooth_paste=Y}', id: 233},
+  							// {text: '9) {Snack=Y, Chocolate=Y, Ice_cream=Y} --> {Soft_drink=Y}', id: 302},
+  							// {text: '10) {Shampoo=Y, Milk=Y, } --> {Tooth_brush=Y,Tooth_paste=Y}', id: 339},
   							{text: 'complete', id: 'no id'}
   							]
   	scope.currentQuestion = 0;
@@ -62,6 +62,15 @@ Module
 
 		if(scope.isCorrectNode()){
 			scope.currentQuestion++;
+			if(scope.currentQuestion == scope.answerChecker.length - 1){
+				// scope.testData
+				var date = new Date();
+				scope.timeCapture.end = date.getTime();
+				var timeConsume = scope.timeCapture.end - scope.timeCapture.start;
+				var resultMessage = 'TableTool: You use time ' + timeConsume + 'Milliseconds';
+				scope.testData.push(resultMessage);
+				sendEmail(scope.testData);
+			}
 		}
 	}
 
@@ -110,13 +119,9 @@ Module
 	}
 
 	$rootScope.$on('callTableTool', function(events, testDataInput){
-  		// scope.start();
   		scope.testData = testDataInput;
-  		// scope.isShow.startButton = true;
-  		// scope.isShowButton = true;
   		scope.isShow.startButton = true;
   		scope.$digest();
-  		// scope.startStatus = true;
 	});
 
 	$rootScope.$on('useUnderstandInput', function(events){
@@ -126,22 +131,18 @@ Module
 	scope.start = function(){
 		scope.isShow.startButton = false;
 		scope.isShow.form = true;
+		var date = new Date();
+		scope.timeCapture.start = date.getTime();
 	};
   	/////////////////////////////////////////////////////////////////////////////////////
   	scope.isCorrectNode = function() {
-		// var depth = node.depth;
-		// var ruleName = '}-->' + node.name;
 		var ruleName = '}-->' + scope.answerList[scope.answerList.length-1];
-		// var currentNode = node;
 		for(var index=scope.answerList.length-2; index >= 0; index--){
-			// ruleName = node.parent.
 			if(index == 0){
-				// ruleName = '{' + ruleName + '}-->' + node.parent.name;
 				ruleName = '{' + scope.answerList[index] + ruleName;
 			}else{
 				ruleName = ',' + scope.answerList[index] + ruleName;
 			}
-			// currentNode = currentNode.parent;
 		}
 
 		var words = scope.answerChecker[scope.currentQuestion].text.split(' ');
@@ -172,12 +173,11 @@ return {
 	},
 	templateUrl: './directive/tableTool.html',
 	link: function(scope) {
-		scope.$watch('understand', function(value) {
-      		// scope.show = value;
-      		if(understand == true){
-      			scope.$emit('useUnderstandInput');
-      		}
-    	});
+		// scope.$watch('understand', function(value) {
+  //     		if(understand == true){
+  //     			scope.$emit('useUnderstandInput');
+  //     		}
+  //   	});
 	}
 }
 });
