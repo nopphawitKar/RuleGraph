@@ -12,15 +12,15 @@ Module
     scope.formStatus =false;
     // scope.currentForm = 0;
   	scope.answerChecker = [	{text: '1) {Sausage=Y} --> {Snack=Y,Soft_drink=Y}', id: 20}, 
-  							// {text: '2) {Yogurt=Y} --> {Snack=Y,Soft_drink=Y,Soap=Y}', id: 24},
-  							// {text: '3) {Soft_drink=Y, Shampoo=Y} --> {Snack=Y,Tooth_paste=Y}', id: 105},
-  							// {text: '4) {Ice_cream=Y} --> {Snack=Y,Chocolate=Y}', id: 118},
-  							// {text: '5) {Chocolate=Y, Ice_cream=Y} --> {Soft_drink=Y}', id: 145},
-  							// {text: '6) {Chocolate=Y, Soap=Y, Tooth_brush=Y} --> {Tooth_paste=Y}', id: 152},
-  							// {text: '7) {Milk=Y, Yogurt=Y} --> {Snack=Y,Soft_drink=Y}', id: 177},
-  							// {text: '8) {Tooth_brush=Y, Milk=Y, Ice_cream=Y} --> {Tooth_paste=Y}', id: 233},
-  							// {text: '9) {Snack=Y, Chocolate=Y, Ice_cream=Y} --> {Soft_drink=Y}', id: 302},
-  							// {text: '10) {Shampoo=Y, Milk=Y, } --> {Tooth_brush=Y,Tooth_paste=Y}', id: 339},
+  							{text: '2) {Yogurt=Y} --> {Snack=Y,Soft_drink=Y,Soap=Y}', id: 24},
+  							{text: '3) {Soft_drink=Y, Shampoo=Y} --> {Snack=Y,Tooth_paste=Y}', id: 105},
+  							{text: '4) {Ice_cream=Y} --> {Snack=Y,Chocolate=Y}', id: 118},
+  							{text: '5) {Chocolate=Y, Ice_cream=Y} --> {Soft_drink=Y}', id: 145},
+  							{text: '6) {Chocolate=Y, Soap=Y, Tooth_brush=Y} --> {Tooth_paste=Y}', id: 152},
+  							{text: '7) {Milk=Y, Yogurt=Y} --> {Snack=Y,Soft_drink=Y}', id: 177},
+  							{text: '8) {Tooth_brush=Y, Milk=Y, Ice_cream=Y} --> {Tooth_paste=Y}', id: 233},
+  							{text: '9) {Snack=Y, Chocolate=Y, Ice_cream=Y} --> {Soft_drink=Y}', id: 302},
+  							{text: '10) {Shampoo=Y, Milk=Y, } --> {Tooth_brush=Y,Tooth_paste=Y}', id: 339},
   							{text: 'complete', id: 'no id'}
   							]
   	scope.currentQuestion = 0;
@@ -45,6 +45,10 @@ Module
 			compareTxt += words[index];
 		}
 
+		//clear new line break
+		ruleName = clearNewLineBreak(ruleName);
+		compareTxt = clearNewLineBreak(compareTxt);
+
 		if(ruleName.localeCompare(compareTxt)==0){
 			return true;
 		}
@@ -57,6 +61,11 @@ Module
 		var date = new Date();
 		scope.timeCapture.start = date.getTime();
 	};
+
+	var clearNewLineBreak = function(text){
+		text = text.replace(/\r/g, "");
+		return text;
+	}
 	scope.$on('changeNode', function(events, node){
     	if(isCorrectNode(node)){
     		if(scope.currentQuestion == scope.answerChecker.length-2/*9*//*0*/){
@@ -105,6 +114,22 @@ return {
   		height: '='
 	},
 	link: function (scope, element, attrs) {
+		function click(d) {
+		  scope.$emit('changeNode', d);
+		  if (!scope.$$phase){
+ 			scope.$apply();
+ 		  }
+
+		  if (d.children) {
+		    d._children = d.children;
+		    d.children = null;
+		  } else {
+		    d.children = d._children;
+		    d._children = null;
+		  }
+		  update(d);
+		}
+
 		var margin = {top: 20, right: 120, bottom: 20, left: 120},
 	    width = 960 - margin.right - margin.left,
 	    height = 800 - margin.top - margin.bottom;
@@ -241,18 +266,7 @@ return {
 		}
 
 		// Toggle children on click.
-		function click(d) {
-		  scope.$emit('changeNode', d);
-
-		  if (d.children) {
-		    d._children = d.children;
-		    d.children = null;
-		  } else {
-		    d.children = d._children;
-		    d._children = null;
-		  }
-		  update(d);
-		}
+		
 
 	}
 }

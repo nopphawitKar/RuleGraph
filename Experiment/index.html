@@ -30,6 +30,7 @@
 </style>
 <head>
 
+  <link rel="stylesheet" type="text/css" href="./css/bootstrap-4.0.0-alpha.6-dist/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular.min.js"></script>
   <link rel="stylesheet" type="text/css" href="./css/collapeTree.css">
 
@@ -62,7 +63,7 @@
     <div>
       <bio-directive></bio-directive>
     </div>
-  
+    
     <div id='understand1' ng-controller='understandCtrl as understandCtrl'>
     <div class="centreText" ng-show = "startButtonShow || understandTestShow">
       <a >กรุณาใช้กราฟเพื่อเข้าถึงกฎ</a> 
@@ -105,6 +106,10 @@
       </div>
     </div>
 
+    <div id='understand3' ng-controller='tableCtrl as tableCtrl' ng-show='isCognition'>
+      <tabletool type='understand'></tabletool>
+    </div>
+
     <div id='collap' ng-controller='collapeTreeCtrl as collapeTreeCtrl'>
       <div class="centreText" ng-show = "startStatus || formStatus">
         <a class="bold"> จงคลิกกราฟเลือกกฎตามโจทย์ที่กำหนดให้</a>
@@ -135,7 +140,7 @@
       </div>
     </div>
 
-    <div id='table' ng-controller='tableCtrl as tableCtrl'>
+    <div id='table' ng-controller='tableCtrl as tableCtrl' ng-if="isLearn">
       <!-- <div>{{isShowButton}}</div> -->
       <tabletool></tabletool>
     </div>
