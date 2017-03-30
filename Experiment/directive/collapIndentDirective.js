@@ -16,10 +16,14 @@ Module
   							{text: '7) {Milk=Y, Yogurt=Y} --> {Snack=Y,Soft_drink=Y}', id: 177},
   							{text: '8) {Tooth_brush=Y, Milk=Y, Ice_cream=Y} --> {Tooth_paste=Y}', id: 233},
   							{text: '9) {Snack=Y, Chocolate=Y, Ice_cream=Y} --> {Soft_drink=Y}', id: 302},
-  							{text: '10) {Shampoo=Y, Milk=Y, } --> {Tooth_brush=Y,Tooth_paste=Y}', id: 339},
+  							{text: '10) {Shampoo=Y, Milk=Y} --> {Tooth_brush=Y,Tooth_paste=Y}', id: 339},
   							{text: 'complete', id: 'no id'}
   							]
   	scope.currentQuestion = 0;
+  	var clearNewLineBreak = function(text){
+		text = text.replace(/\r/g, "");
+		return text;
+	}
 
 	var isCorrectNode = function(node) {
 		var depth = node.depth;
@@ -40,7 +44,8 @@ Module
 			if(index == 0){continue;}
 			compareTxt += words[index];
 		}
-
+		ruleName = clearNewLineBreak(ruleName);
+		compareTxt = clearNewLineBreak(compareTxt);
 		if(ruleName.localeCompare(compareTxt)==0){
 			return true;
 		}

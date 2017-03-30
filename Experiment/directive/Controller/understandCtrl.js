@@ -15,13 +15,13 @@ Module
         scope.timeCapture.start = date.getTime();
       }
 
-      scope.closeFormDelay = function(){
-        scope.completeState = true;
-        $timeout(function(){
-            scope.understandTestShow = false;
-            $rootScope.$emit('changePage', testData);
-        }, 1000);
-      };
+      // scope.closeFormDelay = function(){
+      //   scope.completeState = true;
+      //   $timeout(function(){
+      //       scope.understandTestShow = false;
+      //       $rootScope.$emit('changePage', testData);
+      //   }, 1000);
+      // };
 
       scope.$on('changeNode', function(events, node){
 
@@ -31,7 +31,10 @@ Module
           var timeSpend = scope.timeCapture.end - scope.timeCapture.start;
           testData.push('Understandbility Test1 Complete. You spend ' + timeSpend + 'MilliSeconds');
           // console.log('Understandbility Test1 Complete. You spend ' + timeSpend + 'MilliSeconds');
-          scope.closeFormDelay();
+          // scope.closeFormDelay();
+          scope.completeState = true;
+          scope.understandTestShow = false;
+          $rootScope.$emit('changePage', testData);
         }
         scope.$digest();
       });

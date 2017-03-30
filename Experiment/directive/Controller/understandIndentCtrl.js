@@ -17,11 +17,11 @@ Module
 
       scope.closeFormDelay = function(){
         // scope.understandTestShow = 'delay';
-        scope.completeState = true;
-        $timeout(function(){
-            scope.understandTestShow = false;
-            $rootScope.$emit('changePage', testData);
-        }, 1000);
+        // scope.completeState = true;
+        // $timeout(function(){
+        //     scope.understandTestShow = false;
+        //     $rootScope.$emit('changePage', testData);
+        // }, 1000);
       };
 
       $rootScope.$on('changeIndentNode', function(events, node){
@@ -30,7 +30,10 @@ Module
           scope.timeCapture.end = date.getTime();
           var timeSpend = scope.timeCapture.end - scope.timeCapture.start;
           testData.push('Understandbility Test2 Complete. You spend ' + timeSpend + 'MilliSeconds');
-          scope.closeFormDelay();
+          // scope.closeFormDelay();
+          scope.completeState = true;
+          scope.understandTestShow = false;
+          $rootScope.$emit('changePage', testData);
         }
         scope.$digest();
       });

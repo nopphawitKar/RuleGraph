@@ -11,7 +11,8 @@
   </div>
   <div ng-if='isShow.form'>
   <div class="questionBox">{{answerChecker[currentQuestion].text}}</div>
-  <div>
+  <img src="./resource/table.PNG" class="example1Image" ng-if='isCognition'>
+  <div class="divIndent">
     <div class="list-group column" ng-repeat="column in tableData track by $index" >
       <div class="list-group-item normalFont" 
         ng-class="{'columnDiv list-group-item-success': selected[$parent.$index]==$index,

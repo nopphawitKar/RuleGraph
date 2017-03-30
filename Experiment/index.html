@@ -46,24 +46,32 @@
   <script src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
 
   <script src="./directive/preventRightClickDirective.js"></script>
+  <script src="./directive/plainTextDirective.js"></script>
   <script src="./directive/manualDirective.js"></script>
   <script src="./directive/bioDirective.js"></script>
   <script src="./directive/collapTreeDirective.js"></script>
   <script src="./directive/collapIndentDirective.js"></script>
   <script src="./directive/tableToolDirective.js"></script>
+  <script src="./directive/lastDirective.js"></script>
 
   <!-- <script src="./directive/Controller/mock.js"></script> -->
   <script src="./directive/Controller/mainCtrl.js"></script>
   <script src="./directive/Controller/understandCtrl.js"></script>
   <script src="./directive/Controller/understandIndentCtrl.js"></script>
   <div ng-controller='mainCtrl as mainCtrl'>
+    <div ng-if='pageNo > 1' class="pageNotify bold">
+        page {{pageNo - 1}} from 8
+    </div>
+
     <div>
       <manual></manual>
     </div>
     <div>
       <bio-directive></bio-directive>
     </div>
-    
+    <div ng-controller='plainCtrl as plainCtrl'>
+      <plaintool></plaintool>
+    </div>
     <div id='understand1' ng-controller='understandCtrl as understandCtrl'>
     <div class="centreText" ng-show = "startButtonShow || understandTestShow">
       <a >กรุณาใช้กราฟเพื่อเข้าถึงกฎ</a> 
@@ -78,8 +86,8 @@
     </div>
       <div ng-show='understandTestShow == true'>
        
-        <img src="./resource/complete.png" class="completeIcon" ng-show='completeState == true'>
-        <img src="./resource/collapTree.PNG" class="example1Image centreItem">
+        <!-- <img src="./resource/complete.png" class="completeIcon" ng-show='completeState == true'> -->
+        <img src="./resource/collapTree.PNG" class="example1Image">
 
         <understandbox>
           <graph input-file='./directive/understandRule.json' width='700' height='200'></graph>
@@ -98,7 +106,7 @@
         <button ng-if='startButtonShow == true' ng-click='start()' class="btn btn-primary newLine">start</button>
       </div>
       <div ng-show='understandTestShow == true'>
-        <img src="./resource/complete.png" class="completeIcon" ng-show='completeState == true'>
+        <!-- <img src="./resource/complete.png" class="completeIcon" ng-show='completeState == true'> -->
         <img src="./resource/indent.PNG" class="example1Image">
         <indentubox>
           <indent input-file='./directive/understandRule.json' width='700' height='200' parent-tag="indentubox"></indent>
@@ -144,6 +152,8 @@
       <!-- <div>{{isShowButton}}</div> -->
       <tabletool></tabletool>
     </div>
+
+    <last-page></last-page>
 
   </div>
 </body>

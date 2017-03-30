@@ -1,0 +1,20 @@
+
+<div ng-controller='plainCtrl'>
+	<div ng-if='plainUnderstand || plainLearn'>
+	  	<div class="centreText">
+	    	<a class="bold"> จงคลิกกราฟเลือกกฎตามโจทย์ที่กำหนดให้</a>
+	  	</div>
+	  	<div class='centreButton'>
+	  		<button ng-click='start(data, "")' ng-if='isShow.start' class='btn btn-primary newLine'>Start</button>
+	  	</div>
+
+		<div ng-if='isShow.form'>
+		  	<div class="questionBox" >
+		  		{{answerChecker[currentQuestion].id}}
+		  		{{answerChecker[currentQuestion].text}}
+		  	</div>
+		  	<img src="./resource/plain.png" class="example1Image" ng-if='plainUnderstand'>
+	  		<div ng-repeat='node in nodeList track by $index' class="plainBullet" ng-click='selectNode(node)'>{{node}}</div>
+	  	</div>
+	</div>
+</div>
