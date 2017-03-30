@@ -160,14 +160,12 @@ Module
   		scope.$digest();
 	});
 
-	// $rootScope.$on('useUnderstandInput', function(events){
-	// 	scope.data = cognitionData;
-	// 	scope.answerChecker = [	{text: '1) {Popcorn=Y, Softdrink=Y} --> {Movie_DVD=Y}', id: 20}, 
- //  							{text: 'complete', id: 'no id'}]
-	// 	// scope.tableData.pop();
-	// 	scope.tableData = [];
-	// 	scope.tableData.push(scope.data.children);
-	// });
+	scope.hasChildren = function(node){
+		if(node.children != null){
+			return true;
+		}
+		return false;
+	}
 	
 	scope.start = function(){
 		scope.isShow.startButton = false;
