@@ -14,7 +14,7 @@
 		  		{{answerChecker[currentQuestion].text}}
 		  	</div>
 		  	<img src="./resource/plain.png" class="example1Image" ng-if='plainUnderstand'>
-	  		<div ng-repeat='node in nodeList track by $index' class="plainBullet" ng-click='selectNode(node)'>{{node}}</div>
+	  		<div ng-repeat='node in nodeList track by $index' class="plainBullet" ng-click='selectNode(node)' id='{{$index}}'>{{node}}</div>
 	  	</div>
 	</div>
 </div>
