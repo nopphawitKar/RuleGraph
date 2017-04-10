@@ -9,3 +9,7 @@ my master degree project (Association rule visualization)
 -Contain d3 library.(credit https://d3js.org/(created by Mike bostock))
 
 This project used only one time. So it may seem bad and unattractive.
+
+RUN
+use command http-server <PATH_TO_index.html>     for example http-server C:\Users\edwolfworld\Desktop\d3Project\gitStorage\Experiment
+open browser and type http://localhost:8080/ and enter
