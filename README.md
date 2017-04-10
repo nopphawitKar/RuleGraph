@@ -8,4 +8,4 @@ my master degree project (Association rule visualization)
 -Contain Google API code.
 -Contain d3 library.(credit https://d3js.org/(created by Mike bostock))
 
-This project use only 3 day to implement and it's used only one time. So it may seem bad and unattractive.
+This project used only one time. So it may seem bad and unattractive.
