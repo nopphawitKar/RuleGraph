@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html ng-app='collapeTree'>
+<style>
+
+.node {
+  cursor: pointer;
+}
+
+.node circle {
+  fill: #fff;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+
+.node text {
+  font: 10px sans-serif;
+}
+
+.link {
+  fill: none;
+  stroke: #ccc;
+  stroke-width: 1.5px;
+}
+
+.left {
+  float: left;
+}
+
+</style>
+<head>
+
+  <link rel="stylesheet" type="text/css" href="./css/bootstrap-4.0.0-alpha.6-dist/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="./css/collapeTree.css">
+
+</head>
+<body>
+  <script src="https://d3js.org/d3.v3.min.js"></script>
+  <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+
+  <script src="./mainInstance.js"></script>
+
+  <script src="./directive/js/mailService.js"></script>
+
+  <script src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
+
+  <script src="./directive/preventRightClickDirective.js"></script>
+  <script src="./directive/plainTextDirective.js"></script>
+  <script src="./directive/manualDirective.js"></script>
+  <script src="./directive/bioDirective.js"></script>
+  <script src="./directive/collapTreeDirective.js"></script>
+  <script src="./directive/collapIndentDirective.js"></script>
+  <script src="./directive/tableToolDirective.js"></script>
+  <script src="./directive/lastDirective.js"></script>
+
+  <!-- <script src="./directive/Controller/mock.js"></script> -->
+  <script src="./directive/Controller/mainCtrl.js"></script>
+  <script src="./directive/Controller/understandCtrl.js"></script>
+  <script src="./directive/Controller/understandIndentCtrl.js"></script>
+  <div ng-controller='mainCtrl as mainCtrl'>
+    <div ng-if='pageNo > 1' class="pageNotify bold">
+        page {{pageNo - 1}} from 8
+    </div>
+
+    <div>
+      <manual></manual>
+    </div>
+    <div>
+      <bio-directive></bio-directive>
+    </div>
+    <div ng-controller='plainCtrl as plainCtrl'>
+      <plaintool></plaintool>
+    </div>
+    <div id='understand1' ng-controller='understandCtrl as understandCtrl'>
+    <div class="centreText" ng-show = "startButtonShow || understandTestShow">
+      <a >กรุณาใช้กราฟเพื่อเข้าถึงกฎ</a> 
+      <a class="bold"> {Popcorn=Y, Softdrink=Y} --> {Movie_DVD=Y}</a>
+      <a>กดปุ่ม Start เมื่อพร้อมทำแบบทดสอบ</a>
+    </div>
+    <div ng-show='startButtonShow == true'>
+        
+        <div class="centreButton">
+          <button ng-click='start()' class="btn btn-primary newLine">start</button>
+        </div>
+    </div>
+      <div ng-show='understandTestShow == true'>
+       
+        <!-- <img src="./resource/complete.png" class="completeIcon" ng-show='completeState == true'> -->
+        <img src="./resource/collapTree.PNG" class="example1Image">
+
+        <understandbox>
+          <graph input-file='./directive/understandRule.json' width='700' height='200'></graph>
+        </understandbox>
+        
+      </div>
+    </div>
+
+    <div id='understand2' ng-controller='understandIndentCtrl as understandIndentCtrl'>
+      <div class="centreText" ng-show = "startButtonShow || understandTestShow">
+        <a >กรุณาใช้กราฟเพื่อเข้าถึงกฎ</a> 
+        <a class="bold"> {Popcorn=Y, Softdrink=Y} --> {Movie_DVD=Y}</a>
+        <a>กดปุ่ม Start เมื่อพร้อมทำแบบทดสอบ</a>
+      </div>
+      <div class="centreButton">
+        <button ng-if='startButtonShow == true' ng-click='start()' class="btn btn-primary newLine">start</button>
+      </div>
+      <div ng-show='understandTestShow == true'>
+        <!-- <img src="./resource/complete.png" class="completeIcon" ng-show='completeState == true'> -->
+        <img src="./resource/indent.PNG" class="example1Image">
+        <indentubox>
+          <indent input-file='./directive/understandRule.json' width='700' height='200' parent-tag="indentubox"></indent>
+        </indentubox>
+      </div>
+    </div>
+
+    <div id='understand3' ng-controller='tableCtrl as tableCtrl' ng-show='isCognition'>
+      <tabletool type='understand'></tabletool>
+    </div>
+
+    <div id='collap' ng-controller='collapeTreeCtrl as collapeTreeCtrl'>
+      <div class="centreText" ng-show = "startStatus || formStatus">
+        <a class="bold"> จงคลิกกราฟเลือกกฎตามโจทย์ที่กำหนดให้</a>
+      </div>
+      <div class="centreButton">
+        <button ng-show='startStatus == true' ng-click='start()' class="btn btn-primary newLine">Start</button>
+      </div>
+      <div ng-if='formStatus == true'>
+        <imagebox>
+          <graph input-file='rule.json' ></graph>
+        </imagebox>
+        <div class="questionBox"> โจทย์ ข้อ {{answerChecker[currentQuestion].text}} </div>
+      </div>
+    </div>
+
+    <div id='indent' ng-controller='indentCtrl as indentCtrl'>
+      <div class="centreText" ng-show = "startStatus || formStatus">
+        <a class="bold"> จงคลิกกราฟเลือกกฎตามโจทย์ที่กำหนดให้</a>
+      </div>
+      <div class="centreButton">
+        <button ng-show='startStatus == true' ng-click='start()' class="btn btn-primary newLine">Start</button>
+      </div>
+      <div ng-if='formStatus == true'>
+        <indentBox>
+          <indent input-file='rule.json'></indent>
+        </indentBox>
+        <div class="questionBox"> โจทย์ ข้อ {{answerChecker[currentQuestion].text}} </div>
+      </div>
+    </div>
+
+    <div id='table' ng-controller='tableCtrl as tableCtrl' ng-if="isLearn">
+      <!-- <div>{{isShowButton}}</div> -->
+      <tabletool></tabletool>
+    </div>
+
+    <last-page></last-page>
+
+  </div>
+</body>
+</html>

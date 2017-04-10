@@ -1,0 +1,202 @@
+.startButton{
+	clear:both;
+	float: left;
+}
+
+.question{
+	clear: left;
+	float: left;
+	position: relative;
+	display: inline-block;
+	margin: 0 auto;
+	margin-right: 10px;
+	margin-bottom: 20px;
+	margin-left: 150px;
+}
+.inputBox{
+	float: left;
+	margin-right: 10px;
+	width: 40px;
+	height: 20px;
+	display: block;
+	border-radius: 4px;
+	border: 1px solid #ccc;
+	/*float: left;
+	width: 40px;
+	height: 20px;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;*/
+}
+
+.line{
+	/*position: absolute;*/
+	margin-bottom: 10px;
+}
+
+.relative{
+	position: relative;
+}
+
+.unit{
+	/*margin-left: 10px;*/
+	float: left;
+	margin-right: 10px;
+}
+
+.checkbox{
+	margin-top:6px;
+	float: left;
+	margin-right: 10px;
+}
+
+.example1Image{
+	margin-left: 60px;
+	border-style: solid;
+	margin-bottom: 100px;
+}
+
+.completeIcon{
+	float: right;
+	width: 100px;
+	height: 100px;
+}
+
+.questionBox{
+	width: 600px;
+	height: 300px;
+	position: fixed;
+	top: 100px;
+    right: 0px;
+    z-index: -1;
+}
+
+.pageNotify{
+	/*width: 100px;*/
+	height: 50px;
+	position: fixed;
+	top: 10px;
+    right: 50px;
+    z-index: -1;
+}
+
+indentbox > svg {
+	height: 10000px;
+}
+
+/*indent css*/
+.node rect {
+  cursor: pointer;
+  fill: #fff;
+  fill-opacity: .5;
+  stroke: #3182bd;
+  stroke-width: 1.5px;
+}
+
+.node text {
+  font: 10px sans-serif;
+  pointer-events: none;
+}
+
+path.link {
+  fill: none;
+  stroke: #9ecae1;
+  stroke-width: 1.5px;
+}
+
+/*////////////////////////////*/
+.column {
+  float: left;
+  width: 400px;
+}
+
+.selected {
+  background-color: lightgreen;
+}
+
+.columnDiv {
+  float: left;
+  width: 400px;
+  /*height: 2px;*/
+  font-family: arial,sans-serif;
+  font-size: 15px;
+}
+
+/*manual*/
+.manualPaper {
+	/*margin-top: 50px;
+	margin-left: 150px;
+	margin-right: 150px;*/
+	margin: 0 auto;
+	width: 800px;
+	height: 100%;
+}
+
+.centreText {
+	text-align: center;
+	/*text-indent: 50px;*/
+	margin-bottom: 30px;
+	margin-top: 50px;
+}
+
+.manualbullet {
+	text-indent: 50px;
+	margin-bottom: 10px;
+}
+
+.plainBullet {
+	border: 2px solid rgba(128, 128, 128, 0.34);
+	border-radius: 5px;
+	width: 800px;
+	margin-left: 60px;
+}
+.centreButton {
+	clear: both;
+	margin: 0 auto;
+	margin-top: 50px;
+	width: 100px;
+	/*position:absolute;*/
+	bottom:0;
+}
+
+.centreItem {
+	clear: both;
+	margin: 0 auto;
+}
+
+p {
+    font-family: arial,sans-serif;
+    float: left;
+    margin-right: 10px;
+}
+
+/*.normalFont {
+    font-family: arial,sans-serif;
+    float: left;
+    margin-right: 10px;
+}*/
+
+
+.newLine {
+	clear: both;
+}
+
+.bold {
+	font-weight: bold;
+}
+
+div {	
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-o-user-select: none;
+	user-select: none;
+}
+
+.divIndent{
+	margin-left: 60px;
+}

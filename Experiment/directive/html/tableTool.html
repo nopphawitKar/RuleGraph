@@ -1,0 +1,25 @@
+
+<div ng-controller="tableCtrl as tableCtrl">
+  <div class="centreText" ng-if = "isShow.startButton || isShow.form">
+    <a class="bold"> จงคลิกกราฟเลือกกฎตามโจทย์ที่กำหนดให้</a>
+  </div>
+  <div class="centreButton">
+    <button ng-if='isShow.startButton' ng-click='start()' class="btn btn-primary newLine">start</button>
+  </div>
+  <div ng-if='isShow.form'>
+  <div class="questionBox">{{answerChecker[currentQuestion].text}}</div>
+  <img src="./resource/table.PNG" class="example1Image" ng-if='isCognition'>
+  <div class="divIndent">
+    <div class="list-group column" ng-repeat="column in tableData track by $index" >
+      <div class="list-group-item normalFont" 
+        ng-class="{'columnDiv list-group-item-success': selected[$parent.$index]==$index,
+        'columnDiv list-group-item-info': selected[$parent.$index]==$index && isEndRule($parent.$index, $index),
+        'columnDiv list-group-item-warning':selected[$parent.$index]!=$index && hasChildren(row)}
+        " 
+        ng-repeat="row in column track by $index" 
+        ng-click="createColumn($parent.$index, $index)" 
+        ng-show="isShowRow($parent.$index, $index)">{{row.name}}</div>
+      
+    </div>
+  </div>
+</div>
